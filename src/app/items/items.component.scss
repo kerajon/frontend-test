@@ -1,6 +1,7 @@
+@import "src/styles/common-styles";
+
 :host {
 
-  width: 100%;
-  text-align: center;
+  @include content-page-styles();
 
 }
