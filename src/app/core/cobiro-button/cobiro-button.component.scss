@@ -1,3 +1,5 @@
+@import "src/styles/variables";
+
 :host {
 
   box-sizing: border-box;
@@ -25,8 +27,8 @@
   /* Sizing. */
   min-width: 2em;
   line-height: 1em;
-  padding: 10px 30px;
-  border-radius: 5px;
+  padding: $cobiro-button-padding;
+  border-radius: $cobiro-button-border-radius;
 
   /*
     Explicitly set the default overflow to `visible`. It is already set
@@ -34,15 +36,15 @@
   */
   overflow: visible;
 
-  background-color: #0087EF;
+  background-color: $cobiro-button-color;
 
   /* Font */
-  color: #ffffff;
-  font-size: 14px;
+  color: $cobiro-button-font-color;
+  font-size: $cobiro-button-font-size;
 
   &[disabled] {
     cursor: default;
-    background-color: gray;
+    background-color: $cobiro-button-disabled-color;
 
   }
 
