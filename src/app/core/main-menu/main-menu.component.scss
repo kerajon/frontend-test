@@ -1,9 +1,46 @@
+@import "src/styles/variables";
+
 :host {
 
   > div {
+    /* Sizing of whole menu */
     width: 240px;
     height: 100%;
+    padding: $content-padding-size 0;
 
+    > div {
+      text-align: center;
+      color: $avatar-font-color;
+      margin-bottom: 30px;
+
+      img {
+        margin-bottom: 10px;
+      }
+    }
+
+    > ul {
+      list-style-type: none;
+      font-size: 14px;
+      color: $menu-font-color;
+
+      li {
+        height: 50px;
+        /* Center vertically */
+        line-height: 50px;
+
+        a:link,
+        a:visited {
+          /* Overwrite default styling for anchors */
+          text-decoration: inherit;
+          color: inherit;
+          cursor: pointer;
+
+          /* Increase clickable area */
+          padding: 5px 5px 5px 0;
+
+        }
+      }
+    }
   }
 
 }
