@@ -1,0 +1,58 @@
+@import "src/styles/variables";
+
+:host {
+
+  > div {
+    /* Sizing */
+    height: 64px;
+    margin: 10px $screen-left-side-margin;
+
+    display: flex;
+    flex-direction: row;
+
+    .fill-out-space {
+      flex: 1;
+    }
+
+    .user-profile-info {
+      /* Sizing */
+      height: 32px;
+
+      /* Vertical center align for inlines */
+      line-height: 32px;
+
+      display: flex;
+      flex-direction: row;
+
+      color: $primary-font-color;
+      font-size: 14px;
+
+      /* Don't change cursor over text */
+      cursor: default;
+
+      .user-profile-info-name {
+        margin-left: 5px;
+      }
+
+      .user-profile-info-avatar {
+        height: inherit;
+        border-radius: 50%;
+        border: 1px solid $primary-font-color;
+      }
+
+      .user-profile-info-menu-button {
+        cursor: pointer;
+
+        /* Used padding to increase clickable area of clickable elements */
+        padding: 0 5px;
+
+        img {
+          width: 8px;
+          height: 4px;
+        }
+      }
+    }
+
+  }
+
+}
