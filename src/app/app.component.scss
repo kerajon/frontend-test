@@ -1,0 +1,20 @@
+:host {
+
+  /* Fit size of body. */
+  height: 100%;
+
+  /* Line up components vertically. For example: top-menu, middle-content, bottom-footer */
+  display: flex;
+  flex-direction: column;
+
+  > div {
+    /* Take rest available vertical space. */
+    flex: 1;
+
+    /* Line up horizontally components. For example: menu, content */
+    display: flex;
+    flex-direction: row;
+
+  }
+
+}
