@@ -1,0 +1,40 @@
+@import "src/styles/variables";
+
+:host {
+
+  > div {
+    background-color: $input-bg-color;
+
+  }
+
+  input {
+    /* Sizing */
+    width: 100%;
+    height: $input-height;
+
+    border-radius: $input-border-radius;
+    border: $input-border;
+
+    font-size: $input-font-size;
+    line-height: $input-line-height;
+
+    /* Place search icon inside input text and set padding so text won't overlap icon */
+    background: url(/assets/search-icon.svg) no-repeat scroll 99% 50%;
+    padding: 0 20px 0 10px;
+
+    /* Disable native browser's outline */
+    outline: none;
+
+  }
+
+  input::-webkit-input-placeholder,
+  input:-ms-input-placeholder,
+  input::placeholder {
+    font-family: Light, Soleil, serif;
+    color: $input-placeholder-color;
+    opacity: 0.5;
+
+  }
+
+
+}

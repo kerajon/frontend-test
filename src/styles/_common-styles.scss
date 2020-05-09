@@ -3,5 +3,6 @@
 @mixin content-page-styles {
   width: 100%;
   background-color: $content-page-bg-color;
+  padding: $content-page-padding;
 
 }
