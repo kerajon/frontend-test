@@ -51,3 +51,4 @@ Here is a list of things we want you to do;
 ## Info
 - Application was manually tested on Chrome browser under MacOS
 - Styles don't work properly on mobile portrait mode
+- No error handling

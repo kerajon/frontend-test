@@ -1,1 +1,2 @@
-<p>{{ (item$ | async)?.title }}</p>
+<p *ngIf="item$ | async as item; else no_item">{{ item.title }}</p>
+<ng-template #no_item>No Item</ng-template>

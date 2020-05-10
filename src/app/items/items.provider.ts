@@ -1,6 +1,6 @@
 import { FetchItemsService, ItemEntity } from '../fetch-items.service';
-import { Observable, Subject } from 'rxjs';
-import { map, take, tap } from 'rxjs/operators';
+import { Observable, of, Subject } from 'rxjs';
+import { catchError, map, take, tap } from 'rxjs/operators';
 import { Item } from './item.interface';
 import { TreeNode } from '../tree-node.interface';
 import { ItemNodeModel } from './item-node.model';
@@ -26,7 +26,8 @@ export class ItemsProvider {
 
   public getById(itemId: number): Observable<Item> {
     return this.fetchItems.getById(itemId).pipe(
-      map(({ id, title }) => ({ id, title}))
+      map(({ id, title }) => ({ id, title})),
+      catchError(error => of(null))
     );
   }
 
