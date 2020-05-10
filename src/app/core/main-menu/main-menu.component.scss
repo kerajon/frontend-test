@@ -8,6 +8,8 @@
     height: 100%;
     padding: $content-padding-size 0;
 
+    overflow: auto;
+
     > div {
       text-align: center;
       color: $avatar-font-color;
