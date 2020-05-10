@@ -4,9 +4,9 @@
 
   <div class="fill-out-space"></div>
 
-  <div class="user-profile-info">
-    <img class="user-profile-info-avatar" src="/assets/c4beea3c4cccbceb8de269c8cdf11f2e.png" alt="Avatar">
-    <span class="user-profile-info-name">User Name</span>
+  <div class="user-profile-info" *ngIf="!!userProfileMeta">
+    <img class="user-profile-info-avatar" [src]="userProfileMeta.avatarUrl" alt="Avatar">
+    <span class="user-profile-info-name">{{ userProfileMeta.userName }}</span>
     <span class="user-profile-info-menu-button">
       <img src="/assets/expand-icon.svg" alt="Open menu">
     </span>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { UserProfileMeta } from '../user-profile-meta.interface';
 
 @Component({
   selector: 'app-header-bar',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderBarComponent implements OnInit {
 
+  @Input() userProfileMeta: UserProfileMeta;
   constructor() { }
 
   ngOnInit(): void {
