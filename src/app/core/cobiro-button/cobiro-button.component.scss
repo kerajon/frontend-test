@@ -27,8 +27,8 @@
   /* Sizing. */
   min-width: 2em;
   line-height: 1em;
-  padding: $cobiro-button-padding;
-  border-radius: $cobiro-button-border-radius;
+  padding: $primary-button-padding;
+  border-radius: $primary-button-border-radius;
 
   /*
     Explicitly set the default overflow to `visible`. It is already set
@@ -36,15 +36,15 @@
   */
   overflow: visible;
 
-  background-color: $cobiro-button-color;
+  background-color: $primary-button-color;
 
   /* Font */
-  color: $cobiro-button-font-color;
-  font-size: $cobiro-button-font-size;
+  color: $primary-button-font-color;
+  font-size: $primary-button-font-size;
 
   &[disabled] {
     cursor: default;
-    background-color: $cobiro-button-disabled-color;
+    background-color: $primary-button-disabled-color;
 
   }
 

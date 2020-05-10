@@ -1,22 +1,22 @@
-$content-padding-size: 40px;
-$avatar-font-color: #002D4F;
-$content-font-color: #00124F;
-$menu-font-color: #4C6C83;
-$border-color: #E5E9ED;
+$cobiro-content-padding-size: 40px;
+$cobiro-avatar-font-color: #002D4F;
+$cobiro-content-font-color: #00124F;
+$cobiro-menu-font-color: #4C6C83;
+$cobiro-border-color: #E5E9ED;
 $cabiro-border-radius: 5px;
-$cabiro-border: 1px solid $border-color;
+$cabiro-border: 1px solid $cobiro-border-color;
 
 /* Pages */
 $content-page-bg-color: #F4F9FC;
 $content-page-padding: 40px 70px;
 
 /* Button */
-$cobiro-button-font-color: #FFF;
-$cobiro-button-font-size: 14px;
-$cobiro-button-color: #0087EF;
-$cobiro-button-disabled-color: #CCC;
-$cobiro-button-border-radius: $cabiro-border-radius;
-$cobiro-button-padding: 10px 30px;
+$primary-button-font-color: #FFF;
+$primary-button-font-size: 14px;
+$primary-button-color: #0087EF;
+$primary-button-disabled-color: #CCC;
+$primary-button-border-radius: $cabiro-border-radius;
+$primary-button-padding: 10px 30px;
 
 /* Text Inputs */
 $input-bg-color: #FFF;

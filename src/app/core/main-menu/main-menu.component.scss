@@ -6,13 +6,13 @@
     /* Sizing of whole menu */
     width: 240px;
     height: 100%;
-    padding: $content-padding-size 0;
+    padding: $cobiro-content-padding-size 0;
 
     overflow: auto;
 
     > div {
       text-align: center;
-      color: $avatar-font-color;
+      color: $cobiro-avatar-font-color;
       margin-bottom: 30px;
 
       img {
@@ -23,7 +23,7 @@
     > ul {
       list-style-type: none;
       font-size: 14px;
-      color: $menu-font-color;
+      color: $cobiro-menu-font-color;
 
       li {
         height: 50px;
