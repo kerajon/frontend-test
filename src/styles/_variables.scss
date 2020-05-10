@@ -3,7 +3,8 @@ $avatar-font-color: #002D4F;
 $content-font-color: #00124F;
 $menu-font-color: #4C6C83;
 $border-color: #E5E9ED;
-$border-radius: 5px;
+$cabiro-border-radius: 5px;
+$cabiro-border: 1px solid $border-color;
 
 /* Pages */
 $content-page-bg-color: #F4F9FC;
@@ -14,14 +15,20 @@ $cobiro-button-font-color: #FFF;
 $cobiro-button-font-size: 14px;
 $cobiro-button-color: #0087EF;
 $cobiro-button-disabled-color: #CCC;
-$cobiro-button-border-radius: $border-radius;
+$cobiro-button-border-radius: $cabiro-border-radius;
 $cobiro-button-padding: 10px 30px;
 
 /* Text Inputs */
 $input-bg-color: #FFF;
-$input-border: 1px solid $border-color;
-$input-border-radius: $border-radius;
+$input-border: $cabiro-border;
+$input-border-radius: $cabiro-border-radius;
 $input-height: 40px;
 $input-font-size: 14px;
 $input-line-height: 17px;
 $input-placeholder-color: #4C6C83;
+
+/* Card */
+$card-bg-color: #FFF;
+$card-border: $cabiro-border;
+$card-border-radius: $cabiro-border-radius;
+$card-content-padding: 20px

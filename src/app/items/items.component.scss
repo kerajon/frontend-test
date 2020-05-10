@@ -3,5 +3,10 @@
 :host {
 
   @include content-page-styles();
+  overflow: auto;
 
+  div.vertical-fixed-spacer {
+    height: 20px;
+
+  }
 }

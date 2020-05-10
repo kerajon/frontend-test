@@ -7,12 +7,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { CoreModule } from './core/core.module';
 import { ItemsComponent } from './items/items.component';
+import { ItemsTreeComponent } from './items/items-tree/items-tree.component';
+import { ItemsTreeNodeComponent } from './items/items-tree/items-tree-node/items-tree-node.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ItemsComponent
+    ItemsComponent,
+    ItemsTreeComponent,
+    ItemsTreeNodeComponent
   ],
   imports: [
     BrowserModule,
