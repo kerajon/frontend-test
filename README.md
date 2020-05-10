@@ -47,3 +47,7 @@ Here is a list of things we want you to do;
 - Make a sub page for the items so when you click the button you route to the sub page 
 <br />(Note you can get single item by calling `http://localhost:3000/items/:id`)
 - Make the layout responsive
+
+## Info
+- Application was manually tested on Chrome browser under MacOS
+- Styles don't work properly on mobile portrait mode
