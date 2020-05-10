@@ -1,3 +1,5 @@
-<app-search (searchPhrase)="search($event)"></app-search>
-<div class="vertical-fixed-spacer"></div>
-<app-items-tree (nodeClicked)="redirectToItem($event)" [nodes]="items$ | async"></app-items-tree>
+<div>
+  <app-search (searchPhrase)="search($event)"></app-search>
+  <div class="vertical-fixed-spacer"></div>
+  <app-items-tree (nodeClicked)="redirectToItem($event)" [nodes]="items$ | async"></app-items-tree>
+</div>
