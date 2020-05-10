@@ -4,6 +4,7 @@ import { HeaderBarComponent } from './header-bar/header-bar.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { CobiroButtonComponent } from './cobiro-button/cobiro-button.component';
 import { SearchComponent } from './search/search.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -21,7 +22,8 @@ import { SearchComponent } from './search/search.component';
     SearchComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ]
 })
 export class CoreModule { }
