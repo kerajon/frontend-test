@@ -1,0 +1,8 @@
+@import "src/styles/common-styles";
+
+:host {
+
+  text-align: center;
+  @include content-page-styles();
+
+}

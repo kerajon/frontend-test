@@ -1,9 +1,9 @@
 <ng-container *ngIf="!!node">
   <div class="item-node-card">
     <span>{{ node.title }}</span>
-    <button cobiro-button>Button</button>
+    <button cobiro-button (click)="onClick(node)">Button</button>
   </div>
   <div class="children-container" *ngFor="let child of node.children">
-    <app-items-tree-node [node]="child"></app-items-tree-node>
+    <app-items-tree-node (nodeClicked)="onClick($event)" [node]="child"></app-items-tree-node>
   </div>
 </ng-container>

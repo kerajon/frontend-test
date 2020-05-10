@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { ItemNodeModel } from '../item-node.model';
 
 @Component({
@@ -8,6 +8,7 @@ import { ItemNodeModel } from '../item-node.model';
 })
 export class ItemsTreeComponent {
 
+  @Output() nodeClicked: EventEmitter<ItemNodeModel> = new EventEmitter<ItemNodeModel>();
   @Input() nodes: Array<ItemNodeModel>;
   constructor() { }
 

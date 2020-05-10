@@ -3,6 +3,7 @@ import { ItemsProvider } from './items.provider';
 import { ItemNodeModel } from './item-node.model';
 import { Observable } from 'rxjs';
 import { FetchItemsService } from '../fetch-items.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-items',
@@ -17,7 +18,8 @@ export class ItemsComponent implements OnInit {
   items$: Observable<Array<ItemNodeModel>>;
 
   constructor(
-    private itemProvider: ItemsProvider
+    private itemProvider: ItemsProvider,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -27,5 +29,9 @@ export class ItemsComponent implements OnInit {
 
   public search(searchPhrase: string): void {
     this.itemProvider.find(searchPhrase);
+  }
+
+  public redirectToItem(node: ItemNodeModel) {
+    this.router.navigate(['/item', node.id]);
   }
 }

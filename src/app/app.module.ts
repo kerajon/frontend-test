@@ -9,6 +9,7 @@ import { CoreModule } from './core/core.module';
 import { ItemsComponent } from './items/items.component';
 import { ItemsTreeComponent } from './items/items-tree/items-tree.component';
 import { ItemsTreeNodeComponent } from './items/items-tree/items-tree-node/items-tree-node.component';
+import { ItemComponent } from './item/item.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ItemsTreeNodeComponent } from './items/items-tree/items-tree-node/items
     HomeComponent,
     ItemsComponent,
     ItemsTreeComponent,
-    ItemsTreeNodeComponent
+    ItemsTreeNodeComponent,
+    ItemComponent
   ],
   imports: [
     BrowserModule,
