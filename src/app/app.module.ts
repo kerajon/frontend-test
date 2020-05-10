@@ -10,6 +10,7 @@ import { ItemsComponent } from './items/items.component';
 import { ItemsTreeComponent } from './items/items-tree/items-tree.component';
 import { ItemsTreeNodeComponent } from './items/items-tree/items-tree-node/items-tree-node.component';
 import { ItemComponent } from './item/item.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ItemComponent } from './item/item.component';
     ItemsComponent,
     ItemsTreeComponent,
     ItemsTreeNodeComponent,
-    ItemComponent
+    ItemComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
