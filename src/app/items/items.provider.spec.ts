@@ -106,23 +106,20 @@ describe('ItemProviderService', () => {
 
 function calcTreeInformation(tree: ItemNodeModel): CalculatedTreeInfoResult {
   const result = {
-    deepLevel: 0,
+    deepLevel: 1,
     nodes: 0
   };
-  const set = new Set();
-
   traverseTree(tree);
   function traverseTree(node: ItemNodeModel) {
     ++result.nodes;
-    if (node.children.length > 0) {
-      set.add(node.id)
-    }
-    for (const child of node.children) {
-      traverseTree(child);
+    for (let i = 0; i < node.children.length; i++) {
+      // FIXME - ugly fix for counting tree depth as there is no reference to parent
+      if (!i) {
+        ++result.deepLevel
+      }
+      traverseTree( node.children[i] );
     }
   }
-
-  result.deepLevel = set.size + 1;
 
   return { ...result };
 }
