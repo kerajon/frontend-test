@@ -1,7 +1,6 @@
 import { FetchItemsService, ItemEntity } from '../fetch-items.service';
-import { Observable, of, Subject } from 'rxjs';
+import { EMPTY, Observable, Subject } from 'rxjs';
 import { catchError, map, take, tap } from 'rxjs/operators';
-import { Item } from './item.interface';
 import { ItemNodeModel } from './item-node.model';
 import { ItemTreeBuilder } from '../item-tree-builder.interface';
 
@@ -27,11 +26,15 @@ export class ItemsProvider implements ItemTreeBuilder {
     ).subscribe();
   }
 
-  public getById(itemId: number): Observable<Item> {
-    return this.fetchItems.getById(itemId).pipe(
-      map(({ id, title }) => ({ id, title})),
-      catchError(error => of(null))
-    );
+  public getById(itemId: number): void {
+    this.fetchItems.getById(itemId).pipe(
+      map(({ id, title }) => ( [new ItemNodeModel({ id, title})] )),
+      tap(this.updateValueChanges.bind(this)),
+      catchError(() => {
+        this.updateValueChanges([]);
+        return EMPTY;
+      })
+    ).subscribe();
   }
 
   public getByTitle(itemTitle: string) {

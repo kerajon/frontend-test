@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Item } from '../items/item.interface';
-import { Observable } from 'rxjs';
 import { ItemsProvider } from '../items/items.provider';
 import { FetchItemsService } from '../fetch-items.service';
+import { take, tap } from 'rxjs/operators';
+import { ItemNodeModel } from '../items/item-node.model';
 
 @Component({
   selector: 'app-item',
@@ -15,7 +15,7 @@ import { FetchItemsService } from '../fetch-items.service';
 })
 export class ItemComponent implements OnInit {
 
-  item$: Observable<Item>;
+  item: ItemNodeModel;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,7 +24,11 @@ export class ItemComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.item$ = this.itemsProvider.getById( Number(id) );
+    this.itemsProvider.valueChanges$.pipe(
+      take(1),
+      tap(items => { this.item = items[0]; })
+    ).subscribe();
+    this.itemsProvider.getById( Number(id) );
   }
 
 }
