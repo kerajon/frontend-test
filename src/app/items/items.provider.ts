@@ -2,14 +2,16 @@ import { FetchItemsService, ItemEntity } from '../fetch-items.service';
 import { Observable, of, Subject } from 'rxjs';
 import { catchError, map, take, tap } from 'rxjs/operators';
 import { Item } from './item.interface';
-import { TreeNode } from '../tree-node.interface';
 import { ItemNodeModel } from './item-node.model';
+import { ItemTreeBuilder } from '../item-tree-builder.interface';
 
-export class ItemsProvider {
+export class ItemsProvider implements ItemTreeBuilder {
+
+  private _index: Array<ItemEntity>;
 
   private _valueChanges$: Subject<Array<ItemNodeModel>> = new Subject<Array<ItemNodeModel>>();
-  get valueChanges$(): Subject<Array<ItemNodeModel>> {
-    return this._valueChanges$;
+  get valueChanges$(): Observable<Array<ItemNodeModel>> {
+    return this._valueChanges$.asObservable();
   }
 
   constructor(
@@ -18,7 +20,8 @@ export class ItemsProvider {
 
   public getAll(): void {
     this.fetchItems.getAll().pipe(
-      map(this.convertToTreeAndBuildIndex.bind(this)),
+      tap(this.updateIndex.bind(this)),
+      map(this.convertToTreeList.bind(this)),
       tap(this.updateValueChanges.bind(this)),
       take(1)
     ).subscribe();
@@ -32,39 +35,25 @@ export class ItemsProvider {
   }
 
   public find(itemTitle: string) {
-    this.fetchItems.searchByTitle(itemTitle).pipe(
-      map(this.convertToTreeAndBuildIndex.bind(this)),
-      tap(this.updateValueChanges.bind(this)),
-      take(1)
-    ).subscribe();
-  }
 
-  /* Algorithm can be improved */
-  /* Be careful with huge amount of "items" */
-  private convertToTreeAndBuildIndex(items: Array<ItemEntity>): Array<TreeNode> {
-    let hashMap = new Map();
-    const roots: Array<TreeNode> = [];
+    itemTitle = (itemTitle || '').toLowerCase();
 
-    for (const item of items) {
-      hashMap.set(item.id,  new ItemNodeModel(item));
-    }
-
-    for(const item of items) {
-      if (item.parent_id && hashMap.get( item.parent_id || 0 )) {
-        hashMap.get( item.parent_id || 0 )
-               .children
-               .push( hashMap.get(item.id) );
-      } else {
-        roots.push( hashMap.get(item.id) );
-      }
-    }
-
-    hashMap = null;
-
-    return roots;
+    this.updateValueChanges(
+      this.convertToTreeList(
+        this._index.filter((item) => item.title.toLowerCase().includes(itemTitle) )
+      )
+    );
   }
 
   private updateValueChanges(itemNodes: Array<ItemNodeModel>) {
     this._valueChanges$.next( itemNodes.slice() )
+  }
+
+  private updateIndex(items: Array<ItemEntity>): void {
+    this._index = items.slice();
+  }
+
+  convertToTreeList(items: Array<ItemEntity>): Array<ItemNodeModel> {
+    return ItemNodeModel.prototype.convertToTreeList(items);
   }
 }
