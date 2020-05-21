@@ -89,7 +89,7 @@ describe('ItemProviderService', () => {
     expect(provider).toBeTruthy();
   });
 
-  it('should create tree from flat structure', () => {
+  it('should create tree from flat structure', (done) => {
     let expectedTreeInfoResult: CalculatedTreeInfoResult;
 
     provider.valueChanges$.pipe(take(1)).subscribe(trees => {
@@ -103,6 +103,9 @@ describe('ItemProviderService', () => {
         // Expected same tree deep level
         expect(expectedTreeInfoResult.deepLevel).toBe(expectedTreeInfoResults[i].deepLevel);
       }
+
+      done();
+
     });
 
     provider.getAll();
@@ -115,7 +118,7 @@ describe('ItemProviderService', () => {
     { filterPhrase: 'unknown item', expected: { count: 0 } },
   ].forEach(testCase => {
 
-    it(`should filter tree by item title with '${testCase.filterPhrase}' phrase`, () => {
+    it(`should filter tree by item title with '${testCase.filterPhrase}' phrase`, (done) => {
 
       provider.valueChanges$.pipe(
         skip(1), // skip 'provider.getAll();'
@@ -129,6 +132,8 @@ describe('ItemProviderService', () => {
         if (itemsCount > 0) {
           expect(trees[0]).toBeInstanceOf(ItemNodeModel);
         }
+
+        done();
 
       });
 
@@ -181,7 +186,7 @@ function calcTreeInformation(tree: ItemNodeModel): CalculatedTreeInfoResult {
   function traverseTree(node: ItemNodeModel) {
     ++result.nodes;
     for (let i = 0; i < node.children.length; i++) {
-      // FIXME - ugly fix for counting tree depth as there is no reference to parent
+      // FIXME (JN) ugly fix for counting tree depth as there is no reference to parent
       if (!i) {
         ++result.deepLevel
       }
