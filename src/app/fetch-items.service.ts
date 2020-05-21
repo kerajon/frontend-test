@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Environment } from './environment.class';
 
 export interface ItemEntity {
   id: number;
@@ -14,11 +14,9 @@ export interface ItemEntity {
 })
 export class FetchItemsService {
 
-  // TODO (JN) inject environment
-  host: string = environment.items.host;
-
   constructor(
-    private client: HttpClient
+    private client: HttpClient,
+    private env: Environment,
   ) { }
 
   public getAll(): Observable<Array<ItemEntity>> {
@@ -30,11 +28,11 @@ export class FetchItemsService {
   }
 
   private getAllPath(): string {
-    return this.host + environment.items.path.all;
+    return this.env.items.host + this.env.items.path.all;
   }
 
   private getByIdPath(id: number): string {
-    return this.host + environment.items.path.byId.replace(':id', String(id));
+    return this.env.items.host + this.env.items.path.byId.replace(':id', String(id));
   }
 
 }

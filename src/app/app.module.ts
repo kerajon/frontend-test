@@ -11,6 +11,8 @@ import { ItemsTreeComponent } from './items/items-tree/items-tree.component';
 import { ItemsTreeNodeComponent } from './items/items-tree/items-tree-node/items-tree-node.component';
 import { ItemComponent } from './item/item.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { Environment } from './environment.class';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
     AppRoutingModule,
     CoreModule
   ],
-  providers: [],
+  providers: [
+    { provide: Environment, useValue: environment }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

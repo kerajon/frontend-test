@@ -1,10 +1,10 @@
-export const environment = {
+export const environment = Object.seal({
   production: true,
-  items: {
+  items: Object.seal({
     host: 'http://localhost:3000',
-    path: {
+    path: Object.seal({
       all: '/items',
       byId: '/items/:id'
-    }
-  }
-};
+    })
+  })
+});
