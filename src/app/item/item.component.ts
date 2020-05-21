@@ -23,12 +23,12 @@ export class ItemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
     this.itemsProvider.valueChanges$.pipe(
       take(1),
       tap(items => { this.item = items[0]; })
     ).subscribe();
-    this.itemsProvider.getById( Number(id) );
+    // TODO (JN) if NaN, just show 'no item' message without performing http request
+    this.itemsProvider.getById( Number( this.route.snapshot.paramMap.get('id') ) );
   }
 
 }
