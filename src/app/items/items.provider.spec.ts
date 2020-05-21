@@ -106,10 +106,11 @@ describe('ItemProviderService', () => {
   [
     { filterPhrase: '2', expected: { count: 1 } },
     { filterPhrase: 'e', expected: { count: 8 } },
-    { filterPhrase: 'item', expected: { count: 8 } }
+    { filterPhrase: 'item', expected: { count: 8 } },
+    { filterPhrase: 'unknown item', expected: { count: 0 } },
   ].forEach(testCase => {
 
-    fit(`should filter tree by item title with '${testCase.filterPhrase}' phrase`, () => {
+    it(`should filter tree by item title with '${testCase.filterPhrase}' phrase`, () => {
 
       provider.valueChanges$.pipe(
         skip(1), // skip 'provider.getAll();'
@@ -119,7 +120,10 @@ describe('ItemProviderService', () => {
         const itemsCount = trees.reduce((counter, tree) => ( calcTreeInformation(tree).nodes + counter ), 0);
         expect(trees).toBeDefined();
         expect(itemsCount).toBe(testCase.expected.count);
-        expect(trees[0]).toBeInstanceOf(ItemNodeModel);
+
+        if (itemsCount > 0) {
+          expect(trees[0]).toBeInstanceOf(ItemNodeModel);
+        }
 
       });
 
@@ -128,8 +132,7 @@ describe('ItemProviderService', () => {
 
     });
 
-  })
-
+  });
 
 });
 
