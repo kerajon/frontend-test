@@ -34,7 +34,7 @@ export class ItemsProvider implements ItemTreeBuilder {
     );
   }
 
-  public find(itemTitle: string) {
+  public getByTitle(itemTitle: string) {
 
     itemTitle = (itemTitle || '').toLowerCase();
 

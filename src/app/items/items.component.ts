@@ -28,7 +28,7 @@ export class ItemsComponent implements OnInit {
   }
 
   public search(searchPhrase: string): void {
-    this.itemProvider.find(searchPhrase);
+    this.itemProvider.getByTitle(searchPhrase);
   }
 
   public redirectToItem(node: ItemNodeModel) {
