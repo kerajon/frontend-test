@@ -1,7 +1,7 @@
 import { ItemsProvider } from './items.provider';
 import { ItemEntity } from '../fetch-items.service';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { skip, take } from 'rxjs/operators';
 import { ItemNodeModel } from './item-node.model';
 
 interface CalculatedTreeInfoResult {
@@ -68,26 +68,26 @@ const expectedTreeInfoResults: Array<CalculatedTreeInfoResult> = [
 ];
 
 describe('ItemProviderService', () => {
-  let service: ItemsProvider;
+  let provider: ItemsProvider;
   let fetchItemsService;
 
   beforeEach(() => {
     fetchItemsService = {
       getAll(): Observable<Array<ItemEntity>> {
-        return new BehaviorSubject(mockData.slice());
+        return of(mockData.slice());
       }
     };
-    service = new ItemsProvider(fetchItemsService);
+    provider = new ItemsProvider(fetchItemsService);
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(provider).toBeTruthy();
   });
 
   it('should create tree from flat structure', () => {
     let expectedTreeInfoResult: CalculatedTreeInfoResult;
 
-    service.valueChanges$.pipe(take(1)).subscribe(trees => {
+    provider.valueChanges$.pipe(take(1)).subscribe(trees => {
       // Should create 3 roots from provided structure
       expect(trees.length).toBe(3);
 
@@ -100,8 +100,37 @@ describe('ItemProviderService', () => {
       }
     });
 
-    service.getAll();
+    provider.getAll();
   });
+
+  [
+    { filterPhrase: '2', expected: { count: 1 } },
+    { filterPhrase: 'e', expected: { count: 8 } },
+    { filterPhrase: 'item', expected: { count: 8 } }
+  ].forEach(testCase => {
+
+    fit(`should filter tree by item title with '${testCase.filterPhrase}' phrase`, () => {
+
+      provider.valueChanges$.pipe(
+        skip(1), // skip 'provider.getAll();'
+        take(2)
+      ).subscribe(trees => {
+
+        const itemsCount = trees.reduce((counter, tree) => ( calcTreeInformation(tree).nodes + counter ), 0);
+        expect(trees).toBeDefined();
+        expect(itemsCount).toBe(testCase.expected.count);
+        expect(trees[0]).toBeInstanceOf(ItemNodeModel);
+
+      });
+
+      provider.getAll();
+      provider.getByTitle(testCase.filterPhrase);
+
+    });
+
+  })
+
+
 });
 
 function calcTreeInformation(tree: ItemNodeModel): CalculatedTreeInfoResult {
