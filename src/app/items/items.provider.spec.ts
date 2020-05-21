@@ -1,15 +1,17 @@
 import { ItemsProvider } from './items.provider';
-import { ItemEntity } from '../fetch-items.service';
+import { FetchItemsService, ItemEntity } from '../fetch-items.service';
 import { Observable, of } from 'rxjs';
 import { skip, take } from 'rxjs/operators';
 import { ItemNodeModel } from './item-node.model';
+import { HttpClient } from '@angular/common/http';
+import { Environment } from '../environment.class';
 
 interface CalculatedTreeInfoResult {
   deepLevel: number;
   nodes: number;
 }
 
-const mockData =  [
+const mockData: Array<ItemEntity> =  [
   {
     id: 1,
     title: 'Item 1',
@@ -69,14 +71,17 @@ const expectedTreeInfoResults: Array<CalculatedTreeInfoResult> = [
 
 describe('ItemProviderService', () => {
   let provider: ItemsProvider;
-  let fetchItemsService;
+  let fetchItemsService: FetchItemsService;
 
   beforeEach(() => {
-    fetchItemsService = {
-      getAll(): Observable<Array<ItemEntity>> {
-        return of(mockData.slice());
-      }
+    fetchItemsService = new FetchItemsService({} as HttpClient, {} as Environment);
+    fetchItemsService.getAll = (): Observable<Array<ItemEntity>> => {
+      return of(mockData.slice());
     };
+    fetchItemsService.getById = (id: number): Observable<ItemEntity> => {
+      return of(mockData.filter(item => (item.id === id))[0]);
+    };
+
     provider = new ItemsProvider(fetchItemsService);
   });
 
@@ -129,6 +134,36 @@ describe('ItemProviderService', () => {
 
       provider.getAll();
       provider.getByTitle(testCase.filterPhrase);
+
+    });
+
+  });
+
+  [
+    { expectationName: 'should return one item', itemId: 1, expected: { totalCount: 1, childrenCount: 0 } },
+    { expectationName: 'should return no items for number id', itemId: 9, expected: { totalCount: 0, childrenCount: 0 } },
+    { expectationName: 'should return no items for NaN id', itemId: Number('NaN'), expected: { totalCount: 0, childrenCount: 0 } }
+  ].forEach(testCase => {
+
+    it(testCase.expectationName, (done) => {
+
+      provider.valueChanges$.pipe(
+        take(1)
+      ).subscribe(nodes => {
+
+        expect(nodes).toBeDefined();
+        expect(nodes.length).toBe(testCase.expected.totalCount);
+
+        if (nodes.length > 0) {
+          expect(nodes[0].children.length).toBe(testCase.expected.childrenCount);
+          expect(nodes[0]).toBeInstanceOf(ItemNodeModel);
+        }
+
+        done();
+
+      });
+
+      provider.getById(testCase.itemId);
 
     });
 
