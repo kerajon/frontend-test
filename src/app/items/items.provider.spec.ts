@@ -171,6 +171,7 @@ describe('ItemProviderService', () => {
 
 });
 
+// FIXME (JN) deep level count algorithm was not scaled and it works only with current mock data
 function calcTreeInformation(tree: ItemNodeModel): CalculatedTreeInfoResult {
   const result = {
     deepLevel: 1,
